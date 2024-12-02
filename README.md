@@ -1,4 +1,4 @@
-# Podman ( a Docker alternative with a daemon-less architecture)
+# Podman ( a Docker alternative with a daemon-less architecture )
 
 ## Podman
 alternative to the mighty docker - you can use docker to avoid better deployment for larger scale
@@ -10,7 +10,7 @@ alternative to the mighty docker - you can use docker to avoid better deployment
     podman build -t . 
     podman build -f Py.dockerfile
     
-* use official images for most cases for better functionality and support.
-* debian base for Python and R; ubuntu for latest softwrae; alpine for minimal & secure env
+* use official images for most cases for better functionality and support
+* debian base for Python and R; ubuntu for latest software; alpine for minimal & secure env
 
-*Feel free to download and the template*
+*Feel free to download and use the template*
