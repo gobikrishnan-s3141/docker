@@ -1,5 +1,6 @@
-# debian base - python dev
-FROM python:3.13-slim-bullseye
+# ubuntu LTS base - python dev
+FROM ubuntu:latest
+# FROM python:3.13-slim-bullseye [pre-built debian-base python env] 
 
 # reduce package overhead
 ENV DEBIAN_FRONTEND=noninteractive \
@@ -11,6 +12,10 @@ ENV DEBIAN_FRONTEND=noninteractive \
 RUN apt-get update &&  apt-get install -y --no-install-recommends \
 	build-essential \
 	gcc \
+	python3 \
+	python3-dev \
+	python3-pip \
+	vim \
 	wget \
 	curl \
 	git \
@@ -20,22 +25,22 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends \
 	libhdf5-dev\
 	&& rm -rf /var/lib/apt/lists/*
 
-# python pkgs
-#COPY requirements.txt ./		# (always specify exact version for python packages) 
-RUN pip install --no-cache-dir \ 
-	biopython \
-	numpy \
-	pandas \
-	scipy \
-	jupyter
-
 # user (for better security, don't run as root)
-RUN addgroup -S pymonk && adduser -S pymonk -G pymonk
+RUN groupadd bioinfo && useradd -m -G bioinfo pymonk
 USER pymonk
 
 # workspace
 RUN mkdir -p ~/analysis
-WORKDIR ~/analysis && chown -R pymonk:pymonk ~/analysis
+WORKDIR ~/analysis && chown -R bioinfo:pymonk ~/analysis
+
+# python pkgs
+#COPY requirements.txt ./               # (always specify exact version for python packages) 
+#RUN python3 -m venv 0env && source 0env/bin/activate && pip3 install --no-cache-dir \ 
+#        biopython \
+#        numpy \
+#        pandas \
+#        scipy \
+#        jupyter
 
 # python
 CMD ["python3"]

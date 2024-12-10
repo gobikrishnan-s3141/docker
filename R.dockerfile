@@ -1,8 +1,11 @@
-# Base R image
-FROM r-base:latest
+# Base ubuntu LTS image - R dev 
+FROM ubuntu:latest
+# FROM r-base:latest [debian based R-image by rocker community]
 
-# install system dep 
+# install system dep
 RUN apt-get update && apt-get install -y --no-install-recommends \
+	r-base \
+	r-base-dev \
 	libcurl4-openssl-dev \
 	libssl-dev \
 	libxml2-dev \
@@ -25,7 +28,7 @@ RUN R -e "install.packages(c( \
 	'remote' \
 	), repos ='https://cloud.r-project.org/')"
 
-RUN -e "BiocManager::install(c( \
+RUN R -e "BiocManager::install(c( \
 	'GenomicRanges', \
 	'Biostrings', \
 	'DESeq2', \
@@ -36,14 +39,15 @@ RUN -e "BiocManager::install(c( \
 	))"
 
 # user (for better security, never run as root)
-RUN adduser -S rmonk && adduser -S rmonk -G rmonk
+RUN groupadd bioinfo && useradd -m -G bioinfo rmonk
+USER rmonk
 
 # workspace
 RUN mkdir -p ~/analysis
-WORKDIR ~/analysis && chown -R rmonk:rmonk ~/analysis
+WORKDIR ~/analysis && chown -R rmonk:bioinfo ~/analysis
 
 # R
-CMD["R"]
+CMD ["R"]
 
 #(or)
 # rserver
