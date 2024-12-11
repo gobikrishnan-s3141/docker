@@ -18,5 +18,10 @@ podman build -t pybox -f Py.dockerfile
 ``` 
 podman build -t pybox -f Py.dockerfile && podman build -t rbox -f R.dockerfile && podman build -t shbox -f sh.dockerfile && podman build -t bshbox -f bsh.dockerfile  
 ```  
+### run podman images in interactive mode
+```
+podman run -it ubuntu:latest
+```
+*Replace ubuntu:latest with other pre-built official tags found [here](https://hub.docker.com/search?badges=official) *
 
 *Never run into "It works on my machine moment"*
