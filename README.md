@@ -6,8 +6,8 @@
    - Python, R, and a basic Linux environments for rapid development  
    - syntax is similar to Docker, so it should work with any docker without any issue (replace 'podman' with 'docker')  
    - file formats supported: OCI, SIF  
-   * check out Singularity for running containers in HPC environments"  
-  
+   *check out [Singularity](https://docs.sylabs.io/guides/4.2/user-guide/) for running containers in HPC environments*
+   
 ## build a container  
 ```  
 podman build -t .   
@@ -18,5 +18,5 @@ podman build -t pybox -f Py.dockerfile
 ``` 
 podman build -t pybox -f Py.dockerfile && podman build -t rbox -f R.dockerfile && podman build -t shbox -f sh.dockerfile && podman build -t bshbox -f bsh.dockerfile  
 ```  
-  
-**Feel free to download and the template**
+
+*Never run into "It works on my machine moment"*
