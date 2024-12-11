@@ -22,6 +22,6 @@ podman build -t pybox -f Py.dockerfile && podman build -t rbox -f R.dockerfile &
 ```
 podman run -it ubuntu:latest
 ```
-*Replace ubuntu:latest with other pre-built official tags found [here](https://hub.docker.com/search?badges=official) *
+Replace ubuntu:latest with other pre-built official tags found [here](https://hub.docker.com/search?badges=official)
 
 *Never run into "It works on my machine moment"*
