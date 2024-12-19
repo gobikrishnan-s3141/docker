@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: BioDock
 
 on:
   push:
@@ -14,5 +14,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+    - name: Build Python Docker image
+      run: docker build -f Py.dockerfile -t py:${{ github.sha }}
+    - name: Build R Docker image
+      run: docker build -f R.dockerfile -t r:${{ github.sha }}
+    - name: Build minimal GNU/Linux Docker image
+      run: docker build -f sh.dockerfile -t sh:${{ github.sha }}
+    - name: Build bioinformatics dev Docker image
+      run: docker build -f bsh.dockerfile -t py:${{ github.sha }}
