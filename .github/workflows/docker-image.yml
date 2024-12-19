@@ -31,7 +31,7 @@ jobs:
         tags: r:${{ github.sha }}
         push: false
     
-    - name: Build minimal GNU/Linux Docker image
+    - name: Build minimal Linux Docker image
       uses: docker/build-push-action@v5
       with:
         context: .
