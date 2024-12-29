@@ -1,4 +1,4 @@
-# alpine linux
+# alpine linux - minimal server/workstation
 FROM alpine:latest
 
 # install dependencies

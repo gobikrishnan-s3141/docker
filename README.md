@@ -24,4 +24,4 @@ podman run -it ubuntu:latest
 ```
 Replace ubuntu:latest with other pre-built official tags found [here](https://hub.docker.com/search?badges=official)
 
-*Never run into "It works on my machine moment"*
+*Never run into "It works on my machine!" moment*

@@ -4,11 +4,17 @@ FROM ubuntu:latest
 
 # install system dep
 RUN apt-get update && apt-get install -y --no-install-recommends \
+	build-essential\
+	cmake \
+	clang \
+	llvm \
 	r-base \
 	r-base-dev \
 	libcurl4-openssl-dev \
 	libssl-dev \
 	libxml2-dev \
+	libcairo2-dev \
+	libxt-dev \
 	libfontconfig1-dev \
 	libharfbuzz-dev \
 	libfribidi-dev \
@@ -17,6 +23,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	libtiff5-dev \
 	libjpeg-dev \
 	&& rm -rf /var/lib/apt/lists/*
+
+## set up env to use clang (experimental)
+#ENV CC=clang
+#ENV CXX=clang++
 
 # install core & required R pkgs
 RUN R -e "install.packages(c( \

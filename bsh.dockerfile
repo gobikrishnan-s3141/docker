@@ -1,4 +1,4 @@
-# ubuntu base 
+# ubuntu base - minimal bioinformatics workstation 
 FROM ubuntu:rolling
 
 # install system dep
