@@ -4,7 +4,7 @@
    - Python, R, and a basic Linux environments for rapid development     
    - syntax is similar to Docker, so it should work with any docker without any issue (replace 'podman' with 'docker') 
    - file formats supported: OCI, SIF
-   - The images used in this repo are mostly `ubuntu-LTS`, which is more reliable and has more up-to-date packages than `debian`.
+   - The images used in this repo are mostly `ubuntu-LTS`, which is more reliable and has more up-to-date packages than `debian`.
    *check out [Singularity](https://docs.sylabs.io/guides/4.2/user-guide/) for running containers in HPC environments*
 
 ### Docker file structure
