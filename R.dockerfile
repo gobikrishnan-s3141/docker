@@ -2,12 +2,19 @@
 FROM ubuntu:latest
 # FROM r-base:latest [debian based R-image by rocker community]
 
+# avoids prompting during installation
+ENV DEBIAN_FRONTEND=noninteractive
+
 # install system dep
 RUN apt-get update && apt-get install -y --no-install-recommends \
 	build-essential\
 	cmake \
 	clang \
-	llvm \
+	clang-tools \
+	lldb \
+	lld \
+	libomp-dev \
+	curl \
 	r-base \
 	r-base-dev \
 	libcurl4-openssl-dev \
@@ -22,11 +29,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	libpng-dev \
 	libtiff5-dev \
 	libjpeg-dev \
-	&& rm -rf /var/lib/apt/lists/*
+	zlib1g-dev \
+	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ## set up env to use clang (experimental)
-#ENV CC=clang
-#ENV CXX=clang++
+ENV CC=clang
+ENV CXX=clang++
 
 # install core & required R pkgs
 RUN R -e "install.packages(c( \
@@ -57,7 +65,7 @@ RUN mkdir -p ~/analysis
 WORKDIR ~/analysis && chown -R rmonk:bioinfo ~/analysis
 
 # R
-CMD ["R"]
+ENTRYPOINT ["R"]
 
 #(or)
 # rserver

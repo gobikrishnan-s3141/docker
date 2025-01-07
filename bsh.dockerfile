@@ -14,8 +14,8 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends \
         libopenblas-dev \
         gfortran \
         pkg-config \
-        libhdf5-dev\
-        && rm -rf /var/lib/apt/lists/*
+        zlib1g-dev \
+	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # user
 RUN groupadd bioinfo && useradd -m -G bioinfo bmonk
@@ -26,4 +26,4 @@ RUN mkdir -p ~/analysis
 WORKDIR ~/analysis && chown -R bmonk:bioinfo ~/analysis
 
 # launch a shell
-CMD ["sh"]
+ENTRYPOINT ["sh"]

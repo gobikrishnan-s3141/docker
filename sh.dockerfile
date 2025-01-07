@@ -22,4 +22,4 @@ RUN mkdir ~/scripts
 WORKDIR ~/scripts
 
 #shell
-CMD ["sh"]
+ENTRYPOINT ["sh"]
