@@ -11,18 +11,12 @@ ENV DEBIAN_FRONTEND=noninteractive \
 # install dependencies
 RUN apt-get update &&  apt-get install -y --no-install-recommends \
 	build-essential \
-	gcc \
 	python3 \
 	python3-dev \
 	python3-pip \
-	wget \
 	curl \
 	git \
-	libopenblas-dev \
 	gfortran \
-	pkg-config \
-	zlib1g-dev \
-	libhdf5-dev\
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # user (for better security, don't run as root)
@@ -30,8 +24,10 @@ RUN groupadd bioinfo && useradd -m -G bioinfo pymonk
 USER pymonk
 
 # workspace
-RUN mkdir -p ~/analysis
-WORKDIR ~/analysis && chown -R bioinfo:pymonk ~/analysis
+RUN mkdir -p ~/analysis && \
+chown -R pymonk ~/analysis
+
+WORKDIR ~/analysis
 
 # python pkgs
 #COPY requirements.txt ./               # (always specify exact version for python packages) 
@@ -43,7 +39,7 @@ WORKDIR ~/analysis && chown -R bioinfo:pymonk ~/analysis
 #        jupyter
 
 # python
-ENTRYPOINT ["python3"]
+CMD ["python3"]
 # (or, if you want to use jupyter notebook)
 # jupyter notebook
 #EXPOSE 8888

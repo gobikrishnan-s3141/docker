@@ -9,6 +9,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends \
 	build-essential\
 	cmake \
+	gfortran \
 	clang \
 	clang-tools \
 	lldb \
@@ -17,6 +18,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	curl \
 	r-base \
 	r-base-dev \
+	libopenblas-dev \
 	libcurl4-openssl-dev \
 	libssl-dev \
 	libxml2-dev \
@@ -30,23 +32,18 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	libtiff5-dev \
 	libjpeg-dev \
 	zlib1g-dev \
-	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-## set up env to use clang (experimental)
-ENV CC=clang
-ENV CXX=clang++
-
-# install core & required R pkgs
-RUN R -e "install.packages(c( \
+	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
+# install R pkgs for your project / use renv / {rix}
+	R -e "install.packages(c( \
 	'BiocManager', \
 	'tidyverse', \
 	'devtools', \
 	'rmarkdown', \
 	'shiny', \
 	'remote' \
-	), repos ='https://cloud.r-project.org/')"
+	), repos ='https://cloud.r-project.org/')" && \
 
-RUN R -e "BiocManager::install(c( \
+	R -e "BiocManager::install(c( \
 	'GenomicRanges', \
 	'Biostrings', \
 	'DESeq2', \
@@ -61,11 +58,13 @@ RUN groupadd bioinfo && useradd -m -G bioinfo rmonk
 USER rmonk
 
 # workspace
-RUN mkdir -p ~/analysis
-WORKDIR ~/analysis && chown -R rmonk:bioinfo ~/analysis
+RUN mkdir -p ~/analysis && \
+chown -R rmonk ~/analysis
+
+WORKDIR ~/analysis
 
 # R
-ENTRYPOINT ["R"]
+CMD ["R"]
 
 #(or)
 # rserver

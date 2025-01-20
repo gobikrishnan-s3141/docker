@@ -13,8 +13,8 @@ RUN apk update && apk add --no-cache \
     py3-pip
 
 # add non-root user (for better security)
-RUN adduser -D -h /home/shmonk shmonk
-RUN chown -R shmonk:shmonk /home/shmonk
+RUN adduser -D -h /home/shmonk shmonk && \
+chown -R shmonk /home/shmonk
 USER shmonk
 
 # workspace
@@ -22,4 +22,4 @@ RUN mkdir ~/scripts
 WORKDIR ~/scripts
 
 #shell
-ENTRYPOINT ["sh"]
+CMD ["sh"]
