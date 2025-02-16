@@ -1,26 +1,44 @@
-# server : debian-base
-FROM debian:latest
+# server : debian-base (slim-minimal overhead)
+FROM debian:bookworm-slim
+
+# environment var for server
+ENV DEBIAN_FRONTEND=non-interactive \
+    TZ=Etc/UTC
 
 # install system dep
-RUN apt-get update -y && apt-get install -y curl \
-	nginx \
+RUN apt-get update -y && apt-get install -y build-essential \
+	apt-utils \
+	ca-certificates \
+	wget \
+	curl \
+	gnupg2 \
+	tmux \
+	openssh-client \
+	cron \
+	sudo \
+	vim \
+	htop \
+	net-tools \
+	dnsutils \
 	locales && \
-	apt-get purge && \
 	apt-get clean && \
-	rm -rf /var/lib/apt/lists/* && \localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
-ENV LANG en_US.utf8
+	rm -rf /var/lib/apt/lists/* 
 
 # Set working directory 
-WORKDIR /app
+WORKDIR /srv
 
-# Copy necessary files
-COPY . .
+# create a non-root user with sudo prervileges
+RUN useradd -m -s /bin/bash admin && \
+    echo "admin:password" | chpasswd && \
+    usermod -aG sudo admin
 
-# Expose necessary ports
-EXPOSE 80
+# Copy necessary files * (do not copy everything on the dir, use dockerignore)
+# COPY . .
+# or use VOLUME for shared resources between host and container
+# VOLUME ["/var/log", "/srv/data"]
 
-# Set environment variables
-ENV NODE_ENV=production
+# Expose ports
+EXPOSE 80 443 22 8080
 
-# Run your server application
-CMD ["nginx", "-g", "daemon off;"]
+# Set a default command
+CMD ["bash", "-c", "tail -f /dev/null"]

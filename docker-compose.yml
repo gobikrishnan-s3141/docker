@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+  pybox:
+    build:
+      context: .
+      dockerfile: Py.dockerfile
+    tty: true
+  rbox:
+    build:
+      context: .
+      dockerfile: R.dockerfile
+    tty: true
+  server:
+    build:
+      context: .
+      dockerfile: server.dockerfile
+    tty: true
+  biobox:
+    build:
+      context: .
+      dockerfile: bsh.dockerfile
+    tty: true

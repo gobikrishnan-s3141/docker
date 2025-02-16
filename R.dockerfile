@@ -1,6 +1,5 @@
-# Base ubuntu LTS image - R dev 
-FROM ubuntu:latest
-# FROM r-base:latest [debian based R-image by rocker community]
+# r-ver image from rocker [debian based R-image by rocker community]
+FROM rocker/r-ver
 
 # avoids prompting during installation
 ENV DEBIAN_FRONTEND=noninteractive
@@ -10,10 +9,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	build-essential\
 	cmake \
 	gfortran \
-	clang \
-	clang-tools \
-	lldb \
-	lld \
+	git \
+	sudo \
 	libomp-dev \
 	curl \
 	r-base \
@@ -54,13 +51,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	))"
 
 # user (for better security, never run as root)
-RUN groupadd bioinfo && useradd -m -G bioinfo rmonk
+RUN useradd -m -s /bin/bash rmonk && \
+    echo "rmonk:password" | chpasswd && \
+    usermod -aG sudo rmonk
 USER rmonk
 
 # workspace
 RUN mkdir -p ~/analysis && \
-chown -R rmonk ~/analysis
-
+    chown -R rmonk ~/analysis
 WORKDIR ~/analysis
 
 # R
@@ -68,5 +66,6 @@ CMD ["R"]
 
 #(or)
 # rserver
+# FROM rocker/rstudio
 #EXPOSE 8787
 #docker-compose-yml (write a separate yml file) 
