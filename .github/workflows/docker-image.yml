@@ -35,8 +35,8 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         context: .
-        file: sh.dockerfile
-        tags: sh:${{ github.sha }}
+        file: server.dockerfile
+        tags: server:${{ github.sha }}
         push: false
     
     - name: Build bioinformatics dev Docker image
