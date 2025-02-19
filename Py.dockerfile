@@ -1,6 +1,6 @@
 # python-3 base image [pre-built debian-base python env]
  
-FROM python:3.12-slim-bullseye
+FROM python:3
 
 # reduce package overhead
 ENV DEBIAN_FRONTEND=noninteractive \
