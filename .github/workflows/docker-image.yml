@@ -14,37 +14,8 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
       
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v3
+    - name: Set up Docker Compose
+      run: sudo apt-get update && sudo apt-get install -y docker-compose
       
-    - name: Build Python Docker image
-      uses: docker/build-push-action@v5
-      with:
-        context: .
-        file: Py.dockerfile
-        tags: py:${{ github.sha }}
-        push: false
-      
-    - name: Build R Docker image
-      uses: docker/build-push-action@v5
-      with:
-        context: .
-        file: R.dockerfile
-        tags: r:${{ github.sha }}
-        push: false
-      
-    - name: Build minimal Linux Docker image
-      uses: docker/build-push-action@v5
-      with:
-        context: .
-        file: server.dockerfile
-        tags: server:${{ github.sha }}
-        push: false
-      
-    - name: Build bioinformatics dev Docker image
-      uses: docker/build-push-action@v5
-      with:
-        context: .
-        file: bsh.dockerfile
-        tags: bsh:${{ github.sha }}
-        push: false
+    - name: Run Docker Compose
+      run: docker-compose up -d
