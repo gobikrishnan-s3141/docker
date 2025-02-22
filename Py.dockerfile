@@ -1,7 +1,7 @@
-# ubuntu LTS base image 
-# FROM python:3-slim [pre-built debian-base python env]
+# Python base image [pre-built debian-base python env]
+
+FROM python:3 
  
-FROM ubuntu:24.04
 
 # reduce package overhead
 ENV DEBIAN_FRONTEND=noninteractive \
@@ -34,7 +34,8 @@ chown -R pymonk ~/analysis
 
 WORKDIR ~/analysis
 
-#COPY requirements.txt ./               # (always specify exact version for python packages) 
+# (always specify exact version for python packages)
+COPY requirements.txt ./
 
 # python pkgs
 #RUN python3 -m venv 0env && source 0env/bin/activate && \
