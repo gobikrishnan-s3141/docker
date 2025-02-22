@@ -1,4 +1,4 @@
-version: "3"
+version: "3.8"
 services:
   pybox:
     build:
@@ -14,9 +14,4 @@ services:
     build:
       context: .
       dockerfile: server.dockerfile
-    tty: true
-  biobox:
-    build:
-      context: .
-      dockerfile: bsh.dockerfile
     tty: true
