@@ -35,19 +35,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	'BiocManager', \
 	'tidyverse', \
 	'devtools', \
-	'rmarkdown', \
-	'shiny', \
-	'remote' \
 	), repos ='https://cloud.r-project.org/')" && \
 
 	R -e "BiocManager::install(c( \
-	'GenomicRanges', \
-	'Biostrings', \
 	'DESeq2', \
-	'edgeR', \
 	'limma', \
 	'SingleCellExperiment', \
-	'scater' \
 	))"
 
 # user (for better security, never run as root)
