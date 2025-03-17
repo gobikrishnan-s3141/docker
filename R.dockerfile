@@ -38,7 +38,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 	R -e "BiocManager::install(c('DESeq2', \
 	'limma', \
-	'SingleCellExperiment'
+	'SingleCellExperiment'\
 	))"
 
 # user (for better security, never run as root)
