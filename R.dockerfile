@@ -33,7 +33,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # install R pkgs for your project / use renv / {rix}
 	R -e "install.packages(c('BiocManager', \
 	'tidyverse', \
-	'devtools', \
+	'devtools' \
 	), repos ='https://cloud.r-project.org/')" && \
 
 	R -e "BiocManager::install(c('DESeq2', \
