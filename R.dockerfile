@@ -31,16 +31,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	zlib1g-dev \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
 # install R pkgs for your project / use renv / {rix}
-	R -e "install.packages(c( \
-	'BiocManager', \
+	R -e "install.packages(c('BiocManager', \
 	'tidyverse', \
 	'devtools', \
 	), repos ='https://cloud.r-project.org/')" && \
 
-	R -e "BiocManager::install(c( \
-	'DESeq2', \
+	R -e "BiocManager::install(c('DESeq2', \
 	'limma', \
-	'SingleCellExperiment', \
+	'SingleCellExperiment'
 	))"
 
 # user (for better security, never run as root)
@@ -61,4 +59,4 @@ CMD ["R"]
 # rserver
 # FROM rocker/rstudio
 #EXPOSE 8787
-#docker-compose-yml (write a separate yml file) 
+#docker-compose-yml (write a separate yml file)
