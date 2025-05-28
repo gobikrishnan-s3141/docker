@@ -1,5 +1,5 @@
 # Python base image [pre-built debian-base python env]
-FROM python:3-slim 
+FROM ubuntu/python
 
 # reduce package overhead
 ENV DEBIAN_FRONTEND=noninteractive \
