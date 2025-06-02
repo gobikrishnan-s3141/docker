@@ -19,7 +19,7 @@
 | EXPOSE     | expose specific ports to be exposed (port : 8080)           |
 | VOLUME     | manage volumes for containers                               |
 | RUN        | run commands                                                |
-| ENTRYPOINt | set entrypoint                                              |
+| ENTRYPOINT | set entrypoint                                              |
 | CMD        | set default command to run when container starts            |
 
 ### build a container
