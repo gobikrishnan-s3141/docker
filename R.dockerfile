@@ -1,5 +1,5 @@
 # r-ver image from rocker [debian based R-image by rocker community]
-FROM rocker/r-ver
+FROM rocker/r-ver:4.6.0
 
 # avoids prompting during installation
 ENV DEBIAN_FRONTEND=noninteractive
@@ -13,8 +13,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	sudo \
 	libomp-dev \
 	curl \
-	r-base \
-	r-base-dev \
 	libopenblas-dev \
 	libcurl4-openssl-dev \
 	libssl-dev \
@@ -42,15 +40,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	))"
 
 # user (for better security, never run as root)
-RUN useradd -m -s /bin/bash rmonk && \
-    echo "rmonk:password" | chpasswd && \
-    usermod -aG sudo rmonk
+RUN useradd -m -s /bin/bash rmonk
 USER rmonk
 
 # workspace
-RUN mkdir -p ~/analysis && \
-    chown -R rmonk ~/analysis
-WORKDIR ~/analysis
+RUN mkdir -p /home/rmonk/analysis
+WORKDIR /home/rmonk/analysis
 
 # R
 CMD ["R"]

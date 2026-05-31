@@ -30,7 +30,7 @@ podman build -t pybox -f Py.dockerfile
 
 ### for building all containers in this repo at once
 ```shell    
-podman build -t pybox -f Py.dockerfile && podman build -t rbox -f R.dockerfile && podman build -t serverbox -f server.dockerfile && podman build -t bshbox -f bsh.dockerfile     
+podman build -t pybox -f Py.dockerfile && podman build -t rbox -f R.dockerfile && podman build -t serverbox -f server.dockerfile     
 ```
 (or) using `podman-compose` (use sudo if necessary)
 ```shell
@@ -41,6 +41,6 @@ podman-compose up
 ```shell  
 podman run -it ubuntu:latest /bin/bash 
 ```  
-Replace `debian:bookworm-slim` with other pre-built official tags found [here](https://hub.docker.com/search?badges=official), if you need any specific images 
+Replace `debian:trixie-slim` with other pre-built official tags found [here](https://hub.docker.com/search?badges=official), if you need any specific images 
   
 *Never run into "It works on my machine!" moment*

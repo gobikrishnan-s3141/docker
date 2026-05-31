@@ -1,6 +1,7 @@
-/docker
-  !Dockerfile
-  !docker-compose.yml
-  .git
-  .gitignore
-
+# exclude everything by default, then whitelist
+.git
+.gitignore
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/

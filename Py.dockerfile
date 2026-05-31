@@ -1,5 +1,5 @@
-# Python base image [pre-built debian-base python env]
-FROM python:3.13-slim
+# ubuntu/debian base image
+FROM debian:trixie-slim
 
 # reduce package overhead
 ENV DEBIAN_FRONTEND=noninteractive \
@@ -21,16 +21,13 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends build-essentia
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # user (for better security, don't run as root)
-RUN useradd -m -s /bin/bash pymonk && \
-    echo "pymonk:password" | chpasswd && \
-    usermod -aG sudo pymonk
+RUN useradd -m -s /bin/bash pymonk
 USER pymonk
 
 # workspace
-RUN mkdir -p ~/analysis && \
-chown -R pymonk ~/analysis
+RUN mkdir -p /home/pymonk/analysis
 
-WORKDIR ~/analysis
+WORKDIR /home/pymonk/analysis
 
 # (always specify exact version for python packages)
 COPY requirements.txt ./

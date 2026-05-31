@@ -1,0 +1,27 @@
+# python
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.egg
+dist/
+build/
+.eggs/
+pip-wheel-metadata/
+
+# jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# R
+.Rhistory
+.RData
+.Rproj.user/
+*.Rproj
+renv/library/
+renv/.cache/
+
+.env
+*.pem
+*.key
+secrets/
