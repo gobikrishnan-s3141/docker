@@ -34,7 +34,7 @@ COPY requirements.txt ./
 
 # python pkgs
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
-RUN uv pip install --upgrade pip setuptools wheel && uv pip install --no-cache-dir -r requirements.txt
+RUN uv venv && uv pip install --no-cache-dir -r requirements.txt
 
 # For R integration, install `r-base` and pip install rpy2 
 
