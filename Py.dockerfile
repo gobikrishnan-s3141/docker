@@ -33,8 +33,8 @@ WORKDIR /home/pymonk/analysis
 COPY requirements.txt ./
 
 # python pkgs
-#RUN python3 -m venv 0env && source 0env/bin/activate && \
-RUN python3 -m pip install --upgrade pip setuptools wheel && python3 -m pip install --no-cache-dir -r requirements.txt
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
+RUN uv pip install --upgrade pip setuptools wheel && uv pip install --no-cache-dir -r requirements.txt
 
 # For R integration, install `r-base` and pip install rpy2 
 
